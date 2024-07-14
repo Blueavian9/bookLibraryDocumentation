@@ -69,6 +69,7 @@ backend/
 - Install dependencies: `axios`, `react-router-dom`
 
 #### 2. Directory Structure
+```
 frontend/
 ├── src/
 │ ├── components/
@@ -86,7 +87,7 @@ frontend/
 │ └── index.html
 ├── package.json
 └── README.md
-
+```
 
 #### 3. Key Files
 - `services/authService.js`: Service for authentication-related API calls
