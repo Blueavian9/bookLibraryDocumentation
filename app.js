@@ -1,14 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 const { sequelize } = require("./models");
+const authRoutes = require("./routes/auth.routes");
 
 const app = express();
 
-// Middleware:
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Sync the database:
+// Routes
+app.use("/api/users", authRoutes);
+
+// Sync the database
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -18,11 +22,7 @@ sequelize
     console.error("Unable to connect to the database:", err);
   });
 
-// Routes
-
-// ....
-
-const Port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log("Server is running on port ${PORT}.");
+  console.log(`Server is running on port ${PORT}.`);
 });
