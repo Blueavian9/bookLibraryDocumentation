@@ -1,6 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-const { sequelize } = require('./models'); 
+const express = require("express");
+const cors = require("cors");
+const { sequelize } = require("./models");
 
 const app = express();
 
@@ -9,20 +9,20 @@ app.use(cors());
 app.use(express.json());
 
 // Sync the database:
-sequelize.sync({ force: false })
+sequelize
+  .sync({ force: false })
   .then(() => {
-    console.log('Database connected');
+    console.log("Database connected");
   })
   .catch((err) => {
-    console.error('Unable to connect to the database:', err); 
+    console.error("Unable to connect to the database:", err);
   });
 
-  // Routes
+// Routes
 
-  // ....
+// ....
 
-
-  const Port = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log('Server is running on port ${PORT}.');
-  });
+const Port = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server is running on port ${PORT}.");
+});
