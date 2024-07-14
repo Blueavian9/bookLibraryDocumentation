@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { sequelize } = require("./models");
 const authRoutes = require("./routes/auth.routes");
+const bookRoutes = require("../routes/book.routes");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/users", authRoutes);
+app.use("/api/books", bookRoutes);
 
 // Sync the database
 sequelize

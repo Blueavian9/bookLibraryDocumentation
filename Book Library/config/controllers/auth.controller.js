@@ -1,26 +1,37 @@
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-exports.register = async (req, res) => {
+exports.login = async (req, res) => {
   try {
-    // Get the user data from the request body
-    const { name, email, password } = req.body;
+    // Get the email and password from the request body
+    const { email, password } = req.body;
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Find the user by email
+    const user = await User.findOne({ where: { email } });
 
-    // Create a new user
-    const user = await User.create({
-      id: email, // Use the email as the unique identifier
-      name,
-      email,
-      password: hashedPassword,
+    // If the user is not found, return an error
+    if (!user) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    // Verify the password
+    const isValid = await bcrypt.compare(password, user.password);
+
+    // If the password is invalid, return an error
+    if (!isValid) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    // Generate a JWT token
+    const token = jwt.sign({ userId: user.id }, "your_secret_key", {
+      expiresIn: "1h",
     });
 
-    // Return the created user
-    res.status(201).json(user);
+    // Return the token
+    res.json({ token });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Error creating user" });
+    res.status(500).json({ message: "Error logging in" });
   }
 };
