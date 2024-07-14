@@ -30,6 +30,7 @@ This project involves building a full-stack book library application with user a
 - Install dependencies: `express`, `sequelize`, `sqlite3`, `bcryptjs`, `jsonwebtoken`, `cors`
 
 #### 2. Directory Structure
+```
 backend/
 ├── config/
 │ └── db.config.js
@@ -47,7 +48,7 @@ backend/
 │ └── auth.middleware.js
 ├── app.js
 └── server.js
-
+```
 
 #### 3. Key Files
 - `config/db.config.js`: Database configuration
