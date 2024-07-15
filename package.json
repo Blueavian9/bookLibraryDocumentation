@@ -4,9 +4,9 @@
   "description": "for the Trello Board [Library Project](https://trello.com/invite/b/KgWXv0Gh/ATTIa7d0ccd3feb9e1b6d8786fa6f5b37cc6FAF23085/book-library)",
   "main": "index.js",
   "scripts": {
-    "start": "node bookLibraryDocs/server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -15,7 +15,6 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "node.js": "^0.0.1-security",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7"
   }
