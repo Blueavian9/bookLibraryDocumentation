@@ -15,4 +15,12 @@ const db = {
   Book,
 };
 
-module.exports = db;
+db.User = require("./user.model")(sequelize, Sequilze.DataTypes);
+db.Book = require("./bood.model")(sequelize, Sequelize.DataTypes);
+
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define("User", {
+    // User model definition
+  });
+  return User;
+};
