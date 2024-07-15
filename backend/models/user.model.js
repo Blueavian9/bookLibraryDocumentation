@@ -1,7 +1,6 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const { sequelize } = require("./index");
+const { Sequelize, DataTypes } = require("./index");
 
-const User = sequelize.define("User", {
+const User = Sequelize.define("User", {
   id: {
     type: DataTypes.STRING,
     primaryKey: true,
