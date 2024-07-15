@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require("./index");
+const { Sequelize, DataTypes } = require("../backend/models/index");
 
 const User = Sequelize.define("User", {
   id: {
