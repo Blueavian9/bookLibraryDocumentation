@@ -1,6 +1,8 @@
 const express = require("express");
 const bookController = require("../controllers/book.controller");
-const { verifyToken } = require("../bookLibraryDocs/middleware/auth.middleware");
+const {
+  verifyToken,
+} = require("../bookLibraryDocs/middleware/auth.middleware");
 
 const router = express.Router();
 

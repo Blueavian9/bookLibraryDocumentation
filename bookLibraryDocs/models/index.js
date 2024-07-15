@@ -11,16 +11,8 @@ const sequelize = new Sequelize({
 const db = {
   Sequelize,
   sequelize,
-  User,
-  Book,
+  User: require("./user.model")(sequelize, Sequelize.DataTypes),
+  Book: require("./book.model")(sequelize, Sequelize.DataTypes),
 };
 
-db.User = require("./user.model")(sequelize, Sequilze.DataTypes);
-db.Book = require("./bood.model")(sequelize, Sequelize.DataTypes);
-
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define("User", {
-    // User model definition
-  });
-  return User;
-};
+module.exports = db;
