@@ -128,3 +128,9 @@ exports.delete = async (req, res) => {
     });
   }
 };
+
+exports.createBook = exports.create;
+exports.getAllBooks = exports.findAll;
+exports.getBookById = exports.findOne;
+exports.updateBook = exports.update;
+exports.deleteBook = exports.delete;
