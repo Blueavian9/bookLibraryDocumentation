@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const db = require("../models");
+const config = require("../config/auth.config"); // Add this line
 const User = db.users;
 
-// Authentication controller functions will be implemented here
 exports.signup = async (req, res) => {
   try {
     const user = await User.create({
@@ -17,7 +17,8 @@ exports.signup = async (req, res) => {
   }
 };
 
-exports.signin = async (req, res) => {
+exports.login = async (req, res) => {
+  // Changed from signin to login
   try {
     const user = await User.findOne({ where: { username: req.body.username } });
     if (!user) {
@@ -32,9 +33,10 @@ exports.signin = async (req, res) => {
       return res.status(401).send({ message: "Invalid Password!" });
     }
 
-    const token = jwt.sign({ id: user.id }, "your_jwt_secret", {
-      expiresIn: 86400,
-    }); // 24 hours
+    const token = jwt.sign({ id: user.id }, config.secret, {
+      // Use config.secret
+      expiresIn: 86400, // 24 hours
+    });
 
     res.status(200).send({
       id: user.id,

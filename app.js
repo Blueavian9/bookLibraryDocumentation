@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const Book = require("./routes/book.routes");
+const { Book } = require("./routes/book.routes");
+const { Auth } = require("./routes/auth.routes");
 const app = express();
 
 // CORS configuration
@@ -33,3 +34,13 @@ db.sequelize
   .catch((err) => {
     console.log("Failed to sync db: " + err.meesage);
   });
+
+// ... other imports and setup
+
+app.use((err, req, res, next) => {
+  if (err.name === "UnauthorizedError") {
+    res.status(401).send({ message: "Invalid token" });
+  }
+});
+
+// ... rest of your app.js code
