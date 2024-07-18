@@ -1,24 +1,40 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const db = require("../models");
-const config = require("../config/auth.config"); // Add this line
+const config = require("../config/auth.config");
 const User = db.users;
 
-exports.signup = async (req, res) => {
+exports.register = async (req, res) => {
   try {
+    // Check if username or email already exists
+    const existingUser = await User.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { username: req.body.username },
+          { email: req.body.email },
+        ],
+      },
+    });
+
+    if (existingUser) {
+      return res
+        .status(400)
+        .send({ message: "Username or email already in use." });
+    }
+
+    // Create new user
     const user = await User.create({
       username: req.body.username,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
-    res.send({ message: "User registered successfully!" });
+    res.status(201).send({ message: "User registered successfully!" });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
 };
 
 exports.login = async (req, res) => {
-  // Changed from signin to login
   try {
     const user = await User.findOne({ where: { username: req.body.username } });
     if (!user) {
@@ -34,7 +50,6 @@ exports.login = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id }, config.secret, {
-      // Use config.secret
       expiresIn: 86400, // 24 hours
     });
 

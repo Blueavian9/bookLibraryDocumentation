@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const { Book } = require("./routes/book.routes");
-const { Auth } = require("./routes/auth.routes");
+const book = require("./routes/book.routes");
+const auth = require("./routes/auth.routes");
 const app = express();
 
 // CORS configuration
