@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 // Register routes
 const book = require("./routes/book.routes");
-const auth   = require("./routes/auth.routes");
+const auth = require("./routes/auth.routes");
 
 // Set port, listen for requests
 const PORT = process.env.PORT || 8080;
@@ -28,7 +28,7 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
-// Database
+// Database synchronization
 const db = require("./models");
 db.sequelize
   .sync()
@@ -39,8 +39,14 @@ db.sequelize
     console.log("Failed to sync db: " + err.meesage);
   });
 
-// ... other imports and setup
+//
+app.use((err, req, next) => {
+  console.error(err.stack);
+  res.status(500).sent("Something broke!");
+});
 
+
+// ... other imports and setup
 app.use((err, req, res, next) => {
   if (err.name === "UnauthorizedError") {
     res.status(401).send({ message: "Invalid token" });
