@@ -18,6 +18,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to the bookstore application." });
 });
 
+// Register routes
+const book = require("./routes/book.routes");
+const auth   = require("./routes/auth.routes");
+
 // Set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
