@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const book = require("./routes/book.routes");
-const auth = require("./routes/auth.routes");
+const db = require("./models");
+
 const app = express();
 
 // CORS configuration
@@ -10,7 +10,7 @@ app.use(cors());
 // Parse requests of content-type - application/json
 app.use(express.json());
 
-// Parse requests of content-type - application/x-www-form-urlcoded
+// Parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
 // Simple route
@@ -19,38 +19,28 @@ app.get("/", (req, res) => {
 });
 
 // Register routes
-const book = require("./routes/book.routes");
-const auth = require("./routes/auth.routes");
+const bookRoutes = require("./routes/book.routes");
+const authRoutes = require("./routes/auth.routes");
+bookRoutes(app);
+authRoutes(app);
 
-// Set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  if (err.name === "UnauthorizedError") {
+    return res.status(401).send({ message: "Invalid token" });
+  }
+  res.status(500).send("Something broke!");
 });
 
 // Database synchronization
-const db = require("./models");
 db.sequelize
   .sync()
   .then(() => {
     console.log("Synced db.");
   })
   .catch((err) => {
-    console.log("Failed to sync db: " + err.meesage);
+    console.log("Failed to sync db: " + err.message);
   });
 
-//
-app.use((err, req, next) => {
-  console.error(err.stack);
-  res.status(500).sent("Something broke!");
-});
-
-
-// ... other imports and setup
-app.use((err, req, res, next) => {
-  if (err.name === "UnauthorizedError") {
-    res.status(401).send({ message: "Invalid token" });
-  }
-});
-
-// ... rest of your app.js code
+module.exports = app;

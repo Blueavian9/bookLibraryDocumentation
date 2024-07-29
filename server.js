@@ -1,3 +1,8 @@
 const app = require("./app");
+const config = require("./config/server.config");
 
-// This file will be used for any additional server setup if needed
+const PORT = config.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});

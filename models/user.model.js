@@ -17,6 +17,14 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    verificationToken: {
+      type: Sequelize.STRING,
+      allowNull: true, // Token can be null after verification
+    },
+    verified: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false, // Default value for new users
+    },
   });
 
   return User;

@@ -1,5 +1,6 @@
+// middleware/authJwt.js
 const jwt = require("jsonwebtoken");
-const config = require("../config/auth.config.js");
+const config = require("../config/db.config");
 
 verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
@@ -12,7 +13,7 @@ verifyToken = (req, res, next) => {
 
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
-      return res.status(401).sent({
+      return res.status(401).send({
         message: "Unauthorized!",
       });
     }
