@@ -1,6 +1,6 @@
 // middleware/authJwt.js
 const jwt = require("jsonwebtoken");
-const config = require("../config/db.config");
+const config = require("../config/server.config");
 
 verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
@@ -26,4 +26,9 @@ const authJwt = {
   verifyToken: verifyToken,
 };
 
-module.exports = authJwt;
+// module.exports = authJwt;
+module.exports = {
+  verifyToken: (req, res, next) => {
+    // Token verification logic
+  },
+};

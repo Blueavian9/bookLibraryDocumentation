@@ -1,4 +1,4 @@
-const { authJwt } = require("./middleware/authJwt.js");
+const { authJwt } = require("../middleware/authJwt.js");
 const books = require("../controllers/book.controller.js");
 const router = require("express").Router();
 
