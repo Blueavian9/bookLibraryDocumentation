@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js", 
+    "start": "node server.js",
     "script": "node server.js --host"
   },
   "keywords": [],
@@ -21,5 +21,9 @@
     "sequelize": "^6.37.3",
     "session": "^0.1.0",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }
