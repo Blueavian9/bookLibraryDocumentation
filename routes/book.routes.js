@@ -1,6 +1,9 @@
-const { authJwt } = require("../middleware/authJwt.js");
+const express = require("express");
+const router = express.Router();
 const books = require("../controllers/book.controller.js");
-const router = require("express").Router();
+const authJwt = require("../middleware/authJWT.js");
+
+console.log("authJwt object:", authJwt);
 
 // Public routes
 router.get("/", books.getAllBooks);
@@ -11,6 +14,8 @@ router.post("/", authJwt.verifyToken, books.createBook);
 router.put("/:id", authJwt.verifyToken, books.updateBook);
 router.delete("/:id", authJwt.verifyToken, books.deleteBook);
 
-module.exports = (app) => {
-  app.use("/api/books", router);
-};
+module.exports = router;
+
+// module.exports = (app) => {
+//   app.use("/api/books", router);
+// };

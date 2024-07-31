@@ -19,10 +19,8 @@ app.get("/", (req, res) => {
 });
 
 // Register routes
-const bookRoutes = require("./routes/book.routes");
-const authRoutes = require("./routes/auth.routes");
-bookRoutes(app);
-authRoutes(app);
+const auth = require("./routes/auth.routes.js");
+const book = require("./routes/book.routes.js");
 
 // Error handling middleware
 app.use((err, req, res, next) => {

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const db = require("../models");
-const config = require("../config/auth.config");
+const config = require("../config/db.config");
 const User = db.users;
 
 exports.register = async (req, res) => {
