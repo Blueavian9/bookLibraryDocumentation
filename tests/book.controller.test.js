@@ -1,6 +1,7 @@
 const bookController = require("../controllers/book.controller");
+const db = require("../models");
 
-// Mock the entire db object
+// Mock the db.books methods
 jest.mock("../models", () => ({
   books: {
     findAndCountAll: jest.fn(),
@@ -11,11 +12,7 @@ jest.mock("../models", () => ({
   },
 }));
 
-// Import the mocked db
-const db = require("../models");
-
 describe("Book Controller", () => {
-  // Clear all mocks before each test
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -64,11 +61,9 @@ describe("Book Controller", () => {
 
       expect(db.books.findAndCountAll).toHaveBeenCalled();
       expect(mockRes.status).toHaveBeenCalledWith(500);
-      expect(mockRes.send).toHaveBeenCalledWith({
-        message: expect.any(String),
-      });
+      expect(mockRes.send).toHaveBeenCalledWith({ message: errorMessage });
     });
   });
 
-  // You can add more tests for other controller methods here
+  // Additional tests for createBook, findOne, update, delete methods...
 });
