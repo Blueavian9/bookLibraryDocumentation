@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const db = require("./models");
+const bookRoutes = require("./routes/book.routes");
 
 // Import routes
 const auth = require("./routes/auth.routes.js");
