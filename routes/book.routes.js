@@ -3,8 +3,6 @@ const router = express.Router();
 const books = require("../controllers/book.controller.js");
 const authJwt = require("../middleware/authJWT.js");
 
-app.use("/books", bookRoutes);
-
 // Public routes
 router.get("/", books.getAllBooks);
 router.get("/:id", books.getBookById);
